@@ -24,6 +24,19 @@
             pkgs.mariadb         # MySQL client for convenience
             pkgs.templ           # templ binary
           ];
+
+          shellHook = ''
+            export DATABASE_URL="mysql://capablanca:secret@tcp(127.0.0.1:3306)/capablanca"
+            alias dc="docker-compose up -d"
+            alias ga="git add"
+            alias gs="git status"
+            alias gc="git commit"
+            alias gp="git push"
+            echo ""
+            echo "Added git aliases"
+            echo "Development environment activated!"
+            echo "Run 'dc' to start the db"
+          '';
         };
       }
     );
