@@ -1,0 +1,2 @@
+- TODO: include templ regeneration in air hotreload
+- TODO: add nice logger

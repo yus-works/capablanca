@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:8.0
+    container_name: capablanca-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: capablanca
+      MYSQL_USER: capablanca
+      MYSQL_PASSWORD: secret
+    ports:
+      - "3306:3306"
