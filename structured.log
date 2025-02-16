@@ -1,0 +1,67 @@
+{"level":"info","ts":1739723541.2396896,"caller":"cmd/main.go:87","msg":"Starting server","addr":":8080"}
+{"level":"info","ts":1739723619.0331886,"caller":"cmd/main.go:87","msg":"Starting server","addr":":8080"}
+{"level":"debug","ts":1739723783.5130234,"caller":"cmd/main.go:68","msg":"Starting application..."}
+{"level":"info","ts":1739723783.5178566,"caller":"cmd/main.go:96","msg":"Starting server","addr":":8080"}
+{"level":"debug","ts":1739723785.3428414,"caller":"cmd/main.go:68","msg":"Starting application..."}
+{"level":"info","ts":1739723785.3481815,"caller":"cmd/main.go:96","msg":"Starting server","addr":":8080"}
+{"level":"debug","ts":1739723796.2194736,"caller":"cmd/main.go:91","msg":"Handling request for root endpoint"}
+{"level":"debug","ts":1739723806.8922412,"caller":"cmd/main.go:91","msg":"Handling request for root endpoint"}
+{"level":"debug","ts":1739723901.8817449,"caller":"cmd/main.go:67","msg":"Starting application..."}
+{"level":"info","ts":1739723901.8872206,"caller":"cmd/main.go:107","msg":"Starting server","addr":":8080"}
+{"level":"debug","ts":1739723905.5450382,"caller":"cmd/main.go:92","msg":"Handling request","method":"GET","uri":"/"}
+{"level":"debug","ts":1739723905.5450969,"caller":"cmd/main.go:102","msg":"Rendering root endpoint"}
+{"level":"debug","ts":1739723911.3958583,"caller":"cmd/main.go:92","msg":"Handling request","method":"GET","uri":"/"}
+{"level":"debug","ts":1739723911.3959498,"caller":"cmd/main.go:102","msg":"Rendering root endpoint"}
+{"level":"debug","ts":1739723915.1416287,"caller":"cmd/main.go:67","msg":"Starting application..."}
+{"level":"info","ts":1739723915.147077,"caller":"cmd/main.go:107","msg":"Starting server","addr":":8080"}
+{"level":"debug","ts":1739723917.1086333,"caller":"cmd/main.go:92","msg":"Handling request","method":"GET","uri":"/"}
+{"level":"debug","ts":1739723917.1086912,"caller":"cmd/main.go:102","msg":"Rendering root endpoint"}
+{"level":"debug","ts":1739723998.5014327,"caller":"cmd/main.go:67","msg":"Starting application..."}
+{"level":"info","ts":1739723998.5060012,"caller":"cmd/main.go:107","msg":"Starting server","addr":":8080"}
+{"level":"debug","ts":1739724082.9528255,"caller":"cmd/main.go:67","msg":"Starting application..."}
+{"level":"info","ts":1739724082.9575832,"caller":"cmd/main.go:107","msg":"Starting server","addr":":8080"}
+{"level":"debug","ts":1739724096.3699121,"caller":"cmd/main.go:67","msg":"Starting application..."}
+{"level":"info","ts":1739724096.3746645,"caller":"cmd/main.go:107","msg":"Starting server","addr":":8080"}
+{"level":"debug","ts":1739724101.801802,"caller":"cmd/main.go:72","msg":"Starting application..."}
+{"level":"info","ts":1739724101.8065982,"caller":"cmd/main.go:112","msg":"Starting server","addr":":8080"}
+{"level":"debug","ts":1739724139.9818535,"caller":"cmd/main.go:72","msg":"Starting application..."}
+{"level":"info","ts":1739724139.9868052,"caller":"cmd/main.go:111","msg":"Starting server","addr":":8080"}
+{"level":"debug","ts":1739724156.1767688,"caller":"cmd/main.go:72","msg":"Starting application..."}
+{"level":"info","ts":1739724156.1821241,"caller":"cmd/main.go:111","msg":"Starting server","addr":":8080"}
+{"level":"debug","ts":1739724159.0770946,"caller":"cmd/main.go:96","msg":"Handling request","methodpoop":"GET","uri":"/"}
+{"level":"debug","ts":1739724159.07715,"caller":"cmd/main.go:106","msg":"Rendering root endpoint"}
+{"level":"debug","ts":1739724326.4950223,"caller":"cmd/main.go:72","msg":"Starting application..."}
+{"level":"info","ts":1739724326.5002139,"caller":"cmd/main.go:130","msg":"Starting server","addr":":8080"}
+{"level":"debug","ts":1739724330.043412,"caller":"cmd/main.go:115","msg":"Handling request","method":"\u001b[42mGET\u001b[0m","uri":"/"}
+{"level":"debug","ts":1739724330.0434713,"caller":"cmd/main.go:125","msg":"Rendering root endpoint"}
+{"level":"debug","ts":1739724341.01071,"caller":"cmd/main.go:115","msg":"Handling request","method":"\u001b[42mGET\u001b[0m","uri":"/"}
+{"level":"debug","ts":1739724341.0108001,"caller":"cmd/main.go:125","msg":"Rendering root endpoint"}
+{"level":"debug","ts":1739724341.4334557,"caller":"cmd/main.go:115","msg":"Handling request","method":"\u001b[42mGET\u001b[0m","uri":"/favicon.ico"}
+{"level":"debug","ts":1739724413.723092,"caller":"cmd/main.go:72","msg":"Starting application..."}
+{"level":"info","ts":1739724413.7282119,"caller":"cmd/main.go:129","msg":"Starting server","addr":":8080"}
+{"level":"debug","ts":1739724415.2685373,"caller":"cmd/main.go:114","msg":"Handling request: \u001b[42mGET\u001b[0m /","method":"GET","uri":"/"}
+{"level":"debug","ts":1739724415.2686067,"caller":"cmd/main.go:124","msg":"Rendering root endpoint"}
+{"level":"debug","ts":1739724470.9828906,"caller":"cmd/main.go:72","msg":"Starting application..."}
+{"level":"info","ts":1739724470.988463,"caller":"cmd/main.go:133","msg":"Starting server","addr":":8080"}
+{"level":"debug","ts":1739724476.7355223,"caller":"cmd/main.go:118","msg":"Handling request: \u001b[42;30mGET\u001b[0m /","method":"GET","uri":"/"}
+{"level":"debug","ts":1739724476.7355893,"caller":"cmd/main.go:128","msg":"Rendering root endpoint"}
+{"level":"debug","ts":1739724515.4303868,"caller":"cmd/main.go:72","msg":"Starting application..."}
+{"level":"info","ts":1739724515.436007,"caller":"cmd/main.go:133","msg":"Starting server","addr":":8080"}
+{"level":"debug","ts":1739724516.4562476,"caller":"cmd/main.go:118","msg":"REQ: \u001b[42;30mGET\u001b[0m /","method":"GET","uri":"/"}
+{"level":"debug","ts":1739724516.4563096,"caller":"cmd/main.go:128","msg":"Rendering root endpoint"}
+{"level":"debug","ts":1739724524.206369,"caller":"cmd/main.go:118","msg":"REQ: \u001b[42;30mGET\u001b[0m /","method":"GET","uri":"/"}
+{"level":"debug","ts":1739724524.2066348,"caller":"cmd/main.go:128","msg":"Rendering root endpoint"}
+{"level":"debug","ts":1739724524.349147,"caller":"cmd/main.go:118","msg":"REQ: \u001b[42;30mGET\u001b[0m /","method":"GET","uri":"/"}
+{"level":"debug","ts":1739724524.3492084,"caller":"cmd/main.go:128","msg":"Rendering root endpoint"}
+{"level":"debug","ts":1739724524.4854999,"caller":"cmd/main.go:118","msg":"REQ: \u001b[42;30mGET\u001b[0m /","method":"GET","uri":"/"}
+{"level":"debug","ts":1739724524.4855769,"caller":"cmd/main.go:128","msg":"Rendering root endpoint"}
+{"level":"debug","ts":1739724524.6220887,"caller":"cmd/main.go:118","msg":"REQ: \u001b[42;30mGET\u001b[0m /","method":"GET","uri":"/"}
+{"level":"debug","ts":1739724524.6222553,"caller":"cmd/main.go:128","msg":"Rendering root endpoint"}
+{"level":"debug","ts":1739724550.7340662,"caller":"cmd/main.go:72","msg":"Starting application..."}
+{"level":"info","ts":1739724550.7391694,"caller":"cmd/main.go:133","msg":"Starting server","addr":":8080"}
+{"level":"debug","ts":1739724553.698237,"caller":"cmd/main.go:72","msg":"Starting application..."}
+{"level":"info","ts":1739724553.7038345,"caller":"cmd/main.go:133","msg":"Starting server","addr":":8080"}
+{"level":"debug","ts":1739724556.1483684,"caller":"cmd/main.go:118","msg":"REQUEST: \u001b[42;30mGET\u001b[0m /","method":"GET","uri":"/"}
+{"level":"debug","ts":1739724556.1484284,"caller":"cmd/main.go:128","msg":"RENDER: root endpoint"}
+{"level":"debug","ts":1739724699.9592445,"caller":"cmd/main.go:72","msg":"Starting application..."}
+{"level":"info","ts":1739724699.9639685,"caller":"cmd/main.go:133","msg":"Starting server","addr":":8080"}
