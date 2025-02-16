@@ -17,8 +17,9 @@ type User struct {
 	Name string `gorm:"size:100"`
 }
 
-func HTML(c echo.Context, cmp templ.Component) error {
+func HTML(c echo.Context, cmp templ.Component, status int) error {
 	c.Response().Header().Set(echo.HeaderContentType, echo.MIMETextHTML)
+	c.Response().WriteHeader(status)
 	return cmp.Render(c.Request().Context(), c.Response().Writer)
 }
 
@@ -39,7 +40,7 @@ func main() {
 
 	// Example route
 	e.GET("/", func(c echo.Context) error {
-		return HTML(c, templates.Hello("bruh"))
+		return HTML(c, templates.Base("joe"), 200)
 	})
 
 	// Start server
