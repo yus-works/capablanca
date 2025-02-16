@@ -1,2 +1,3 @@
 tmp/
 internal/templates/*.go
+structured.log

@@ -2,17 +2,16 @@ package main
 
 import (
 	"io"
-	"os"
 
 	"github.com/a-h/templ"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"github.com/yus-works/capablanca/internal/logging"
 	"github.com/yus-works/capablanca/internal/templates"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 
 	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
 )
 
 // Example model
@@ -28,45 +27,8 @@ func HTML(c echo.Context, cmp templ.Component, status int) error {
 	return cmp.Render(c.Request().Context(), c.Response().Writer)
 }
 
-func setupLogger() *zap.Logger {
-	// --- Setup Zap logger with two separate cores ---
-
-	// Console core: pretty print with colors.
-	// We want to show only debug (and error) messages on the console.
-	consoleEncoderConfig := zap.NewDevelopmentEncoderConfig()
-	consoleEncoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder // adds colors
-	consoleCore := zapcore.NewCore(
-		zapcore.NewConsoleEncoder(consoleEncoderConfig),
-		zapcore.Lock(os.Stdout),
-		// Only enable Debug-level (and errors) on console.
-		zap.LevelEnablerFunc(func(lvl zapcore.Level) bool {
-			return lvl == zap.DebugLevel || lvl >= zap.ErrorLevel
-		}),
-	)
-
-	// File core: structured JSON output.
-	fileEncoderConfig := zap.NewProductionEncoderConfig()
-	logFile, err := os.OpenFile("structured.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
-	if err != nil {
-		panic("failed to open log file: " + err.Error())
-	}
-	fileCore := zapcore.NewCore(
-		zapcore.NewJSONEncoder(fileEncoderConfig),
-		zapcore.AddSync(logFile),
-		zap.DebugLevel, // all logs (debug and above) go to file
-	)
-
-	// Combine the two cores.
-	combinedCore := zapcore.NewTee(
-		consoleCore, // writes only debug (and errors) to stdout
-		fileCore,    // writes structured JSON to file
-	)
-
-	return zap.New(combinedCore, zap.AddCaller(), zap.AddStacktrace(zap.ErrorLevel))
-}
-
 func main() {
-	logger := setupLogger()
+	logger := logging.SetupLogger()
 	defer logger.Sync()
 
 	logger.Debug("Starting application...")
@@ -96,26 +58,8 @@ func main() {
 			method := c.Request().Method
 			uri := c.Request().RequestURI
 
-			var coloredMethod string
-			switch method {
-			case "GET":
-				// Green background with black text.
-				coloredMethod = "\033[42;30m" + method + "\033[0m"
-			case "POST":
-				// Blue background with white text.
-				coloredMethod = "\033[44;97m" + method + "\033[0m"
-			case "PUT":
-				// Magenta background with white text.
-				coloredMethod = "\033[45;97m" + method + "\033[0m"
-			case "DELETE":
-				// Red background with white text.
-				coloredMethod = "\033[41;97m" + method + "\033[0m"
-			default:
-				coloredMethod = method
-			}
-
 			// The coloredMethod is part of the main message so the terminal will render the colors.
-				logger.Debug("REQUEST: " + coloredMethod + " " + uri,
+				logger.Debug("REQUEST: " + logging.ColorMethod(method) + " " + uri,
 				zap.String("method", method), // raw method for structured logging
 				zap.String("uri", uri),
 			)
