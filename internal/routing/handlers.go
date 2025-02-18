@@ -10,6 +10,9 @@ import (
 func RegisterRoutes(e *echo.Echo, log *zap.Logger) {
 	e.GET("/", func(c echo.Context) error {
 		log.Debug("RENDER: root endpoint")
-		return HTML(c, templates.Base("joe"), 200)
+
+		content := templates.Table("left")
+
+		return HTML(c, templates.Base("my title", templates.Bar(), content), 200)
 	})
 }

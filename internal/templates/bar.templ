@@ -1,0 +1,21 @@
+package templates
+
+// TODO: figure out why darkmode button dont work (mode based on default browser
+// theme does work tho)
+templ Bar() {
+<script>
+    function toggleDarkMode() {
+        console.log('joe')
+        const htmlElement = document.documentElement;
+        htmlElement.classList.toggle('dark-theme');
+    }
+</script>
+
+    <div class="box">
+        <h1 class="title">Capablanca</h1>
+        <button class="button is-link" onclick="toggleDarkMode()">
+            Toggle Dark Mode
+        </button>
+    </div>
+
+}

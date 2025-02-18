@@ -1,13 +1,38 @@
 package templates
 
-templ Base(name string) {
-	<!DOCTYPE html>
-	<html>
-	<body>
-
-	<h1>My First Heading</h1>
-	<p>My first paragraph.</p>
-
-	</body>
-	</html>
+templ Table(sidebarPosition string) {
+        <section class="section">
+            <div class="container">
+                <div class="columns">
+                    <aside id="sidebar" class="column is-one-quarter box is-left">
+                        <h2 class="title">Sidebar</h2>
+                        <button class="button is-link" onclick="toggleSidebarPosition()">Toggle Sidebar</button>
+                    </aside>
+                    <main class="column box">
+                        <h1 class="title">Welcome, !</h1>
+                        <table class="table is-striped is-bordered is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>John Doe</td>
+                                    <td>30</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Jane Smith</td>
+                                    <td>25</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </main>
+                </div>
+            </div>
+        </section>
 }
