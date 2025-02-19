@@ -1,16 +1,11 @@
 package db
 
 import (
+	"github.com/yus-works/capablanca/internal/seeding"
 	"go.uber.org/zap"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
-
-// Example model
-type User struct {
-	ID   uint   `gorm:"primaryKey"`
-	Name string `gorm:"size:100"`
-}
 
 func SetupDb(l *zap.Logger) {
 	// Connect to database using GORM ---
@@ -20,8 +15,7 @@ func SetupDb(l *zap.Logger) {
 		l.Fatal("failed to connect to database", zap.Error(err))
 	}
 
-	// Auto-migrate the schema.
-	if err := db.AutoMigrate(&User{}); err != nil {
-		l.Fatal("failed to auto-migrate schema", zap.Error(err))
+	if err := seeding.SeedDatabase(db); err != nil {
+		l.Fatal("failed to seed database", zap.Error(err))
 	}
 }
