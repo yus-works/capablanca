@@ -8,9 +8,14 @@ templ Base(title string, bar, content templ.Component) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{title}</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+        <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        </style>
     </head>
     <body>
-        @bar
         @content
     </body>
     </html>

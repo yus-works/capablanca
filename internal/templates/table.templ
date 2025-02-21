@@ -1,38 +1,50 @@
 package templates
 
-templ Table(sidebarPosition string) {
-        <section class="section">
-            <div class="container">
-                <div class="columns">
-                    <aside id="sidebar" class="column is-one-quarter box is-left">
-                        <h2 class="title">Sidebar</h2>
-                        <button class="button is-link" onclick="toggleSidebarPosition()">Toggle Sidebar</button>
-                    </aside>
-                    <main class="column box">
-                        <h1 class="title">Welcome, !</h1>
-                        <table class="table is-striped is-bordered is-fullwidth">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Age</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>John Doe</td>
-                                    <td>30</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Jane Smith</td>
-                                    <td>25</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </main>
-                </div>
-            </div>
-        </section>
+templ Table(items []string) {
+@css()
+<div class="columns">
+    <aside id="sidebar" class="menu p-6 has-background-grey-darker">
+        <p class="menu-label">Tables</p>
+        <ul class="menu-list">
+        for _, item := range items {
+            <li class="m-1"><a>{ item }</a></li>
+        }
+        </ul>
+    </aside>
+
+    <section id="table" class="section">
+        <div class="container">
+            <main class="column box">
+                <h1 class="title">Welcome, !</h1>
+                <table class="table is-striped is-bordered is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>John Doe</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Jane Smith</td>
+                            <td>25</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </main>
+        </div>
+    </section>
+</div>
+}
+
+templ css() {
+    <style>
+        #sidebar { height: 100vh; }
+    </style>
 }

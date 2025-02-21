@@ -11,7 +11,9 @@ func RegisterRoutes(e *echo.Echo, log *zap.Logger) {
 	e.GET("/", func(c echo.Context) error {
 		log.Debug("RENDER: root endpoint")
 
-		content := templates.Table("left")
+		tables := []string{ "User", "Product", "Order", "OrderItem", "Review", "Category" }
+
+		content := templates.Table(tables)
 
 		return HTML(c, templates.Base("my title", templates.Bar(), content), 200)
 	})
