@@ -1,6 +1,8 @@
 package routing
 
 import (
+	"strings"
+
 	"github.com/labstack/echo/v4"
 	"github.com/yus-works/capablanca/internal/repository"
 	"github.com/yus-works/capablanca/internal/templates"
@@ -18,7 +20,18 @@ func RegisterRoutes(e *echo.Echo, log *zap.Logger, db *gorm.DB) {
 			log.Error("Failed to get table names")
 		}
 
-		content := templates.Table(names)
+
+		var namesClean []string
+		for _, name := range names {
+			if strings.Contains(name, "_") { continue }
+
+			if len(name) > 0 {
+				title := strings.ToUpper(name[:1]) + name[1:]
+				namesClean = append(namesClean, title)
+			}
+		}
+
+		content := templates.Table(namesClean)
 
 		return HTML(c, templates.Base("my title", templates.Bar(), content), 200)
 	})
