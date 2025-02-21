@@ -33,6 +33,6 @@ func RegisterRoutes(e *echo.Echo, log *zap.Logger, db *gorm.DB) {
 
 		content := templates.Table(namesClean)
 
-		return HTML(c, templates.Base("my title", templates.Bar(), content), 200)
+		return HTML(c, templates.Base("my title", content), 200)
 	})
 }
