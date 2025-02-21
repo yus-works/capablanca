@@ -1,0 +1,13 @@
+package templates
+
+templ Sidebar(items []string) {
+<style> #sidebar { height: 100vh; } </style>
+<aside id="sidebar" class="menu p-6 has-background-grey-darker">
+    <p class="menu-label">Tables</p>
+    <ul class="menu-list">
+    for _, item := range items {
+        <li class="m-1"><a>{ item }</a></li>
+    }
+    </ul>
+</aside>
+}
