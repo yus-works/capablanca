@@ -8,10 +8,10 @@ import (
 )
 
 
-func RegisterMiddleware(e *echo.Echo, l *zap.Logger) {
+func RegisterMiddleware(e *echo.Echo, log *zap.Logger) {
 	e.Use(middleware.RecoverWithConfig(middleware.RecoverConfig{
 		LogErrorFunc: func(c echo.Context, err error, stack []byte) error {
-			l.Error("PANIC recovered", zap.Error(err), zap.String("stack", string(stack)))
+			log.Error("PANIC recovered", zap.Error(err), zap.String("stack", string(stack)))
 			return err
 		},
 		StackSize: 1 << 10, // 1KB stack trace
@@ -24,7 +24,7 @@ func RegisterMiddleware(e *echo.Echo, l *zap.Logger) {
 			uri := c.Request().RequestURI
 
 			// The coloredMethod is part of the main message so the terminal will render the colors.
-			l.Debug(logging.ColorMethod(method)+" "+uri,
+			log.Debug(logging.ColorMethod(method)+" "+uri,
 				zap.String("method", method), // raw method for structured logging
 				zap.String("uri", uri),
 			)
