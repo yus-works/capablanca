@@ -9,5 +9,71 @@ templ Sidebar(items []string) {
         <li class="m-1"><a>{ item }</a></li>
     }
     </ul>
+
+<div
+  class="dropdown is-active"
+  x-data="{
+    open: false,
+    toggle() {
+        if (this.open) { return this.close() }
+
+        this.$refs.button.focus()
+
+        this.open = true
+    },
+    close(focusAfter) {
+        if (! this.open) return
+
+        this.open = false
+
+        focusAfter && focusAfter.focus()
+    },
+    toggleTheme() {
+      let doc = document.querySelector('html')
+      doc.classList.toggle('theme-dark')
+      doc.classList.toggle('theme-light')
+    }
+  }"
+  x-on:keydown.escape.prevent.stop="close($refs.button)"
+  x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
+  x-id="['dropdown-button']"
+  class="dropdown is-active"
+>
+  <div class="dropdown-trigger">
+    <button
+      class="button"
+      x-ref="button"
+      x-on:click="toggle()"
+      :aria-expanded="open"
+      :aria-controls="$id('dropdown-button')"
+      type="button"
+    >
+      <span>Dropdown button</span>
+      <span class="icon is-small">
+        <i class="bi bi-chevron-down" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="dropdown-menu" role="menu">
+    <div 
+      class="dropdown-content"
+            x-ref="panel"
+            x-show="open"
+            x-transition.origin.top.left
+            x-on:click.outside="close($refs.button)"
+            :id="$id('dropdown-button')"
+            x-cloak
+    >
+      <a href="#" class="dropdown-item"> Other dropdown item </a>
+      <hr class="dropdown-divider" />
+      <button
+        type="button"
+        class="dropdown-item"
+        @click="toggleTheme()"
+      > Toggle page theme </button>
+    </div>
+  </div>
+</div>
+
 </aside>
 }
