@@ -31,7 +31,18 @@ func RegisterRoutes(e *echo.Echo, log *zap.Logger, db *gorm.DB) {
 			}
 		}
 
-		content := templates.Table(namesClean)
+		// TODO: dynamically select tablename
+		columns, err := repository.GetTableColumns(db, "orders") // NOTE: case sensitive!
+		if err != nil {
+			log.Error("Failed to get column names for table ")
+		}
+
+		tableData, err := repository.GetTableData(db, "orders") // NOTE: case sensitive!
+		if err != nil {
+			log.Error("Failed to get column names for table ")
+		}
+
+		content := templates.Table(namesClean, columns, tableData)
 
 		return HTML(c, templates.Base("my title", content), 200)
 	})

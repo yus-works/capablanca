@@ -1,35 +1,36 @@
 package templates
 
-templ Table(items []string) {
+import "fmt"
+
+templ Table(tableNames, columns []string, tableData []map[string]interface{}) {
 <div class="columns">
-@Sidebar(items)
-    <section id="table" class="section">
-        <div class="container">
-            <main class="column box">
-                <h1 class="title">Welcome, !</h1>
-                <table class="table is-striped is-bordered is-fullwidth">
-                    <thead>
+@Sidebar(tableNames)
+
+<section id="table" class="section">
+    <div class="container">
+        <main class="column box">
+            <h1 class="title">Welcome, !</h1>
+            <table class="table is-striped is-bordered is-fullwidth">
+                <thead>
+                    <tr>
+                        for _, column := range columns {
+                        <th> {column} </th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    for _, row := range tableData {
                         <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Age</th>
+                            for _, column := range columns {
+                                <td> {fmt.Sprintf("%v", row[column])} </td>
+                            }
                         </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>John Doe</td>
-                            <td>30</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jane Smith</td>
-                            <td>25</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </main>
-        </div>
-    </section>
+                    }
+                </tbody>
+            </table>
+        </main>
+    </div>
+</section>
+
 </div>
 }
