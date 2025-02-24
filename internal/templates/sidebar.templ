@@ -1,12 +1,14 @@
 package templates
 
-templ Sidebar(items []string) {
+import "strings"
+
+templ Sidebar(tableNames []string) {
 <style> #sidebar { height: 100vh; } </style>
 <aside id="sidebar" class="menu p-6 has-background-grey-darker">
     <p class="menu-label">Tables</p>
     <ul class="menu-list">
-    for _, item := range items {
-        <li class="m-1"><a>{ item }</a></li>
+    for _, name := range tableNames {
+        <li class="m-1"><a href={ templ.SafeURL("/table/" + strings.ToLower(name)) }>{ name }</a></li>
     }
     </ul>
 
