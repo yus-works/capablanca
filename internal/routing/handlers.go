@@ -12,7 +12,7 @@ import (
 
 
 func RegisterRoutes(e *echo.Echo, log *zap.Logger, db *gorm.DB) {
-	e.GET("/", func(c echo.Context) error {
+	e.GET("/table/:name", func(c echo.Context) error {
 		log.Debug("RENDER: root endpoint")
 
 		names, err := repository.GetTableNames(db)
@@ -31,18 +31,19 @@ func RegisterRoutes(e *echo.Echo, log *zap.Logger, db *gorm.DB) {
 			}
 		}
 
-		// TODO: dynamically select tablename
-		columns, err := repository.GetTableColumns(db, "orders") // NOTE: case sensitive!
+		tableName := c.Param("name")
+
+		columns, err := repository.GetTableColumns(db, tableName)
 		if err != nil {
 			log.Error("Failed to get column names for table ")
 		}
 
-		tableData, err := repository.GetTableData(db, "orders") // NOTE: case sensitive!
+		tableData, err := repository.GetTableData(db, tableName)
 		if err != nil {
 			log.Error("Failed to get column names for table ")
 		}
 
-		content := templates.Table(namesClean, columns, tableData)
+		content := templates.Table(tableName, namesClean, columns, tableData)
 
 		return HTML(c, templates.Base("my title", content), 200)
 	})
