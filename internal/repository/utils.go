@@ -2,6 +2,7 @@ package repository
 
 import (
 	"gorm.io/gorm"
+	"time"
 )
 
 // GetTableNames returns a list of all table names in the database.
@@ -20,6 +21,13 @@ func GetTableData(db *gorm.DB, tableName string) ([]map[string]interface{}, erro
 	query := "SELECT * FROM " + tableName
 	if err := db.Raw(query).Scan(&results).Error; err != nil {
 		return nil, err
+	}
+	for _, row := range results {
+		for key, value := range row {
+			if t, ok := value.(time.Time); ok {
+				row[key] = t.Format("2006-01-02 15:04") // Format without seconds
+			}
+		}
 	}
 	return results, nil
 }
