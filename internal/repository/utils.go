@@ -24,6 +24,23 @@ func GetTableData(db *gorm.DB, tableName string) ([]map[string]interface{}, erro
 	return results, nil
 }
 
+// GetTableColumns returns the column names of a specific table.
+func GetTableColumns(db *gorm.DB, tableName string) ([]string, error) {
+	var columns []string
+	query := `
+		SELECT
+			COLUMN_NAME
+		FROM
+			information_schema.columns
+		WHERE
+			table_name = ? AND table_schema = DATABASE()
+	`
+	if err := db.Raw(query, tableName).Scan(&columns).Error; err != nil {
+		return nil, err
+	}
+	return columns, nil
+}
+
 // RecordExists checks if a record exists in the given table based on a condition.
 func RecordExists(db *gorm.DB, tableName string, condition string, args ...interface{}) (bool, error) {
 	var exists bool
