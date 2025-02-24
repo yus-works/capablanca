@@ -2,14 +2,14 @@ package templates
 
 import "fmt"
 
-templ Table(tableNames, columns []string, tableData []map[string]interface{}) {
+templ Table(tableName string, tableNames, columns []string, tableData []map[string]interface{}) {
 <div class="columns">
 @Sidebar(tableNames)
 
 <section id="table" class="section">
     <div class="container">
         <main class="column box">
-            <h1 class="title">Welcome, !</h1>
+            <h1 class="title"> {tableName} </h1>
             <table class="table is-striped is-bordered is-fullwidth">
                 <thead>
                     <tr>
