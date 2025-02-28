@@ -12,6 +12,11 @@ import (
 
 
 func RegisterRoutes(e *echo.Echo, log *zap.Logger, db *gorm.DB) {
+	
+	e.GET("/", func(c echo.Context) error {
+		return c.HTML(200, "Hello, World!")
+	})
+
 	e.GET("/table/:name", func(c echo.Context) error {
 		log.Debug("RENDER: root endpoint")
 
