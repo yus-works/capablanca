@@ -6,7 +6,7 @@ import (
 )
 
 // TODO: cache metadata queries somehow
-// TODO: test3
+// TODO: test4
 
 // GetTableNames returns a list of all table names in the database.
 func GetTableNames(db *gorm.DB) ([]string, error) {
