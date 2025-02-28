@@ -35,7 +35,10 @@ func GetTableData(db *gorm.DB, tableName string) ([]map[string]interface{}, erro
 	return results, nil
 }
 
-// GetTableColumns returns the column names of a specific table.
+// NOTE: ordered so
+// 1. "id" (if exists)
+// 2. Columns ending with "_id"
+// 3. All other columns in their original order
 func GetTableColumns(db *gorm.DB, tableName string) ([]string, error) {
 	var columns []string
 	query := `
@@ -45,7 +48,15 @@ func GetTableColumns(db *gorm.DB, tableName string) ([]string, error) {
 			information_schema.columns
 		WHERE
 			table_name = ? AND table_schema = DATABASE()
+		ORDER BY
+			CASE 
+				WHEN COLUMN_NAME = 'id' THEN 1 
+				WHEN COLUMN_NAME LIKE '%\_id' THEN 2 
+				ELSE 3 
+			END,
+			ordinal_position
 	`
+
 	if err := db.Raw(query, tableName).Scan(&columns).Error; err != nil {
 		return nil, err
 	}
