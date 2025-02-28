@@ -10,9 +10,8 @@ import (
 	"gorm.io/gorm"
 )
 
-
 func RegisterRoutes(e *echo.Echo, log *zap.Logger, db *gorm.DB) {
-	
+
 	e.GET("/", func(c echo.Context) error {
 		return c.HTML(200, "Hello, World!")
 	})
@@ -25,10 +24,11 @@ func RegisterRoutes(e *echo.Echo, log *zap.Logger, db *gorm.DB) {
 			log.Error("Failed to get table names")
 		}
 
-
 		var namesClean []string
 		for _, name := range names {
-			if strings.Contains(name, "_") { continue }
+			if strings.Contains(name, "_") {
+				continue
+			}
 
 			if len(name) > 0 {
 				title := strings.ToUpper(name[:1]) + name[1:]
@@ -43,12 +43,12 @@ func RegisterRoutes(e *echo.Echo, log *zap.Logger, db *gorm.DB) {
 			log.Error("Failed to get column names for table ")
 		}
 
-		reorderedColumns := make([]string, len(columns))
-		reorderedColumns[0] = "id"
-
 		for i, col := range columns {
-			if (col == "id") { continue }
-			reorderedColumns[i] = col
+			if col == "id" {
+				tmp := columns[0]
+				columns[0] = col
+				columns[i] = tmp
+			}
 		}
 
 		tableData, err := repository.GetTableData(db, tableName)
