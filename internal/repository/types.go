@@ -6,6 +6,7 @@ type Column struct {
 }
 
 type Table struct {
+	Name string
 	Columns []Column
 	Data    []map[string]interface{}
 }
