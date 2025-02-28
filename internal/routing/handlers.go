@@ -43,14 +43,6 @@ func RegisterRoutes(e *echo.Echo, log *zap.Logger, db *gorm.DB) {
 			log.Error("Failed to get column names for table ")
 		}
 
-		for i, col := range columns {
-			if col == "id" {
-				tmp := columns[0]
-				columns[0] = col
-				columns[i] = tmp
-			}
-		}
-
 		tableData, err := repository.GetTableData(db, tableName)
 		if err != nil {
 			log.Error("Failed to get column names for table ")
