@@ -18,28 +18,28 @@ func GetTableNames(db *gorm.DB) ([]string, error) {
 }
 
 func GetTable(db *gorm.DB, tableName string) (*Table, error) {
-    columns, err := GetTableColumns(db, tableName)
-    if err != nil {
-        return nil, err
-    }
+	columns, err := GetTableColumns(db, tableName)
+	if err != nil {
+		return nil, err
+	}
 
 	data, err := GetTableData(db, tableName)
-    if err != nil {
-        return nil, err
-    }
+	if err != nil {
+		return nil, err
+	}
 
-    return &Table{
-        Columns: columns,
-        Data:    data,
-    }, nil
+	return &Table{
+		Columns: columns,
+		Data:    data,
+	}, nil
 }
 
 // GetTableData retrieves all rows from the specified table.
 func GetTableData(db *gorm.DB, tableName string) ([]map[string]interface{}, error) {
-    var data []map[string]interface{}
-    if err := db.Table(tableName).Find(&data).Error; err != nil {
-        return nil, err
-    }
+	var data []map[string]interface{}
+	if err := db.Table(tableName).Find(&data).Error; err != nil {
+		return nil, err
+	}
 
 	for _, row := range data {
 		for key, value := range row {
