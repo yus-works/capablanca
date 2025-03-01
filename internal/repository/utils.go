@@ -17,32 +17,51 @@ func GetTableNames(db *gorm.DB) ([]string, error) {
 	return tables, nil
 }
 
+func GetTable(db *gorm.DB, tableName string) (*Table, error) {
+    columns, err := GetTableColumns(db, tableName)
+    if err != nil {
+        return nil, err
+    }
+
+	data, err := GetTableData(db, tableName)
+    if err != nil {
+        return nil, err
+    }
+
+    return &Table{
+        Columns: columns,
+        Data:    data,
+    }, nil
+}
+
 // GetTableData retrieves all rows from the specified table.
 func GetTableData(db *gorm.DB, tableName string) ([]map[string]interface{}, error) {
-	var results []map[string]interface{}
-	query := "SELECT * FROM " + tableName
-	if err := db.Raw(query).Scan(&results).Error; err != nil {
-		return nil, err
-	}
-	for _, row := range results {
+    var data []map[string]interface{}
+    if err := db.Table(tableName).Find(&data).Error; err != nil {
+        return nil, err
+    }
+
+	for _, row := range data {
 		for key, value := range row {
 			if t, ok := value.(time.Time); ok {
 				row[key] = t.Format("2006-01-02 15:04") // Format without seconds
 			}
 		}
 	}
-	return results, nil
+	return data, nil
 }
 
-// NOTE: ordered so
-// 1. "id" (if exists)
-// 2. Columns ending with "_id"
-// 3. All other columns in their original order
-func GetTableColumns(db *gorm.DB, tableName string) ([]string, error) {
-	var columns []string
+func GetTableColumns(db *gorm.DB, tableName string) ([]Column, error) {
+	type columnRow struct {
+		ColumnName string
+		DataType   string
+	}
+
+	var columnRows []columnRow
 	query := `
 		SELECT
-			COLUMN_NAME
+			COLUMN_NAME AS column_name,
+			DATA_TYPE AS data_type
 		FROM
 			information_schema.columns
 		WHERE
@@ -56,9 +75,18 @@ func GetTableColumns(db *gorm.DB, tableName string) ([]string, error) {
 			ordinal_position
 	`
 
-	if err := db.Raw(query, tableName).Scan(&columns).Error; err != nil {
+	if err := db.Raw(query, tableName).Scan(&columnRows).Error; err != nil {
 		return nil, err
 	}
+
+	columns := make([]Column, 0, len(columnRows))
+	for _, row := range columnRows {
+		columns = append(columns, Column{
+			Name: row.ColumnName,
+			Type: ToDbType(row.DataType),
+		})
+	}
+
 	return columns, nil
 }
 
