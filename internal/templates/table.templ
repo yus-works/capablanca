@@ -1,28 +1,33 @@
 package templates
 
-import "fmt"
+import (
+    "fmt"
 
-templ Table(tableName string, tableNames, columns []string, tableData []map[string]interface{}) {
+    "github.com/yus-works/capablanca/internal/repository"
+)
+
+templ Table(tableNames []string, table *repository.Table) {
 <div class="columns">
 @Sidebar(tableNames)
 
 <section id="table" class="section">
     <div class="container">
         <main class="column box">
-            <h1 class="title"> {tableName} </h1>
+            <h1 class="title"> {table.Name} </h1>
             <table class="table is-striped is-bordered is-fullwidth">
                 <thead>
                     <tr>
-                        for _, column := range columns {
-                        <th> {column} </th>
+                        for _, column := range table.Columns {
+                        <th> {column.Name} </th>
                         }
                     </tr>
                 </thead>
                 <tbody>
-                    for _, row := range tableData {
+                    for _, row := range table.Data {
                         <tr>
-                            for _, column := range columns {
-                                <td> {fmt.Sprintf("%v", row[column])} </td>
+                            for _, column := range table.Columns {
+                                <td> {fmt.Sprintf("%v", row[column.Name])} </td>
+                                // TODO: MAKE CONDITIONAL DATA TAGS
                             }
                         </tr>
                     }

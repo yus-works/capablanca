@@ -38,17 +38,12 @@ func RegisterRoutes(e *echo.Echo, log *zap.Logger, db *gorm.DB) {
 
 		tableName := c.Param("name")
 
-		columns, err := repository.GetTableColumns(db, tableName)
+		table, err := repository.GetTable(db, tableName)
 		if err != nil {
-			log.Error("Failed to get column names for table ")
+			log.Error("Failed to get table data and metadata")
 		}
 
-		tableData, err := repository.GetTableData(db, tableName)
-		if err != nil {
-			log.Error("Failed to get column names for table ")
-		}
-
-		content := templates.Table(tableName, namesClean, columns, tableData)
+		content := templates.Table(namesClean, table)
 
 		return HTML(c, templates.Base("my title", content), 200)
 	})
