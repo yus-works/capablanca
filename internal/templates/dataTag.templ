@@ -14,17 +14,7 @@ templ DataTag(data string, dbType repository.DbType) {
                 value={ data }
             >
 
-        case repository.DbFloat, repository.DbDouble:
-            <input
-                :readonly="isReadOnly"
-                class="input"
-                :class="{ 'hide-spinners': isReadOnly }"
-                type="number"
-                :step="isReadOnly ? undefined : 0.01"
-                value={ data }
-            >
-
-        case repository.DbDecimal:
+        case repository.DbFloat, repository.DbDouble, repository.DbDecimal:
             <input
                 :readonly="isReadOnly"
                 class="input"
