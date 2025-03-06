@@ -6,11 +6,29 @@ import (
     "github.com/yus-works/capablanca/internal/repository"
 )
 
+func defaultStr(data interface{}) string {
+    return fmt.Sprintf("%v", data)
+}
+
 templ Table(tableNames []string, table *repository.Table) {
 <div class="columns">
 @Sidebar(tableNames)
 
 <section id="table" class="section">
+
+<style>
+    /* Hide arrows in Chrome, Safari, Edge */
+    .hide-spinners::-webkit-outer-spin-button,
+    .hide-spinners::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Hide arrows in Firefox */
+    .hide-spinners {
+      -moz-appearance: textfield;
+    }
+</style>
     <div class="container">
         <main class="column box">
             <h1 class="title"> {table.Name} </h1>
@@ -20,15 +38,30 @@ templ Table(tableNames []string, table *repository.Table) {
                         for _, column := range table.Columns {
                         <th> {column.Name} </th>
                         }
+                        <th> options </th>
                     </tr>
                 </thead>
                 <tbody>
                     for _, row := range table.Data {
-                        <tr>
+                        <tr
+                        x-data="{ isReadOnly: true }"
+                        :class="{ 'is-info': !isReadOnly }"
+                        >
                             for _, column := range table.Columns {
-                                <td> {fmt.Sprintf("%v", row[column.Name])} </td>
-                                // TODO: MAKE CONDITIONAL DATA TAGS
+                                <td>
+                                @DataTag(defaultStr(row[column.Name]), column.Type)
+                                </td>
                             }
+
+                            <td>
+                                <button
+                                    class="button"
+                                    type="button"
+                                    @click="isReadOnly = !isReadOnly"
+                                >
+                                    <i class="bi bi-pencil-fill" aria-hidden="true"></i>
+                                </button>
+                            </td>
                         </tr>
                     }
                 </tbody>
