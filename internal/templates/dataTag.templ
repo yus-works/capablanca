@@ -1,0 +1,89 @@
+package templates
+
+import "github.com/yus-works/capablanca/internal/repository"
+
+templ DataTag(data string, dbType repository.DbType) {
+    switch dbType {
+        case repository.DbInt, repository.DbBigInt:
+            <input
+                :readonly="isReadOnly"
+                class="input"
+                :class="{ 'hide-spinners': isReadOnly }"
+                type="number"
+                :step="isReadOnly ? undefined : 1"
+                value={ data }
+            >
+
+        case repository.DbFloat, repository.DbDouble:
+            <input
+                :readonly="isReadOnly"
+                class="input"
+                :class="{ 'hide-spinners': isReadOnly }"
+                type="number"
+                :step="isReadOnly ? undefined : 0.01"
+                value={ data }
+            >
+
+        case repository.DbDecimal:
+            <input
+                :readonly="isReadOnly"
+                class="input"
+                :class="{ 'hide-spinners': isReadOnly }"
+                type="number"
+                :step="isReadOnly ? undefined : 0.01"
+                value={ data }
+            >
+
+        case repository.DbVarchar:
+            <input
+                :readonly="isReadOnly"
+                class="input"
+                type="text"
+                maxlength="255"
+                value={ data }
+            >
+
+        case repository.DbText:
+            <textarea></textarea>
+
+        case repository.DbBoolean:
+            <input
+                :readonly="isReadOnly"
+                class="input"
+                type="checkbox"
+                value={
+                data }
+            >
+
+        case repository.DbDate:
+            <input
+                :readonly="isReadOnly"
+                class="input"
+                type="date"
+                value={ data }
+            >
+
+        case repository.DbDateTime, repository.DbTimestamp:
+            <input
+                :readonly="isReadOnly"
+                class="input"
+                type="datetime-local"
+                value={ data }
+                style="width: 13em"
+            >
+
+        case repository.DbJSON:
+            <textarea></textarea>
+
+        case repository.DbEnum:
+            <select><!-- Add <option> values dynamically --></select>
+
+        default:
+            <input
+                :readonly="isReadOnly"
+                class="input"
+                type="text"
+                value={ data }
+            >
+    }
+}
