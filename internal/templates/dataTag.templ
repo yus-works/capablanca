@@ -10,7 +10,7 @@ templ DataTag(data string, dbType repository.DbType) {
                 class="input"
                 :class="{ 'hide-spinners': isReadOnly }"
                 type="number"
-                :step="isReadOnly ? undefined : 1"
+                :step="1"
                 value={ data }
             >
 
@@ -20,7 +20,7 @@ templ DataTag(data string, dbType repository.DbType) {
                 class="input"
                 :class="{ 'hide-spinners': isReadOnly }"
                 type="number"
-                :step="isReadOnly ? undefined : 0.01"
+                :step="0.01"
                 value={ data }
             >
 
