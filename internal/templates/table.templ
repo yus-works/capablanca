@@ -28,6 +28,11 @@ templ Table(tableNames []string, table *repository.Table) {
     .hide-spinners {
       -moz-appearance: textfield;
     }
+
+    .bi-check {
+        line-height: 0.1em;
+        font-size: 1.5em;
+    }
 </style>
     <div class="container">
         <main class="column box">
@@ -56,10 +61,14 @@ templ Table(tableNames []string, table *repository.Table) {
                             <td>
                                 <button
                                     class="button"
+                                    :class="{ 'is-info': isReadOnly, 'is-success': !isReadOnly }"
                                     type="button"
                                     @click="isReadOnly = !isReadOnly"
                                 >
-                                    <i class="bi bi-pencil-fill" aria-hidden="true"></i>
+                                    <i
+                                        :class="{ 'bi-pencil-fill': isReadOnly, 'bi-check-circle-fill': !isReadOnly }"
+                                        aria-hidden="true"
+                                    ></i>
                                 </button>
                             </td>
                         </tr>
